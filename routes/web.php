@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Route;
 
 use App\Http\Livewire\Bookings;
 use App\Http\Livewire\Inventory;
-use App\Http\Livewire\InventoryKuali;
+use App\Http\Livewire\Inventorykuali;
 
 /*
 |--------------------------------------------------------------------------
@@ -33,4 +33,4 @@ Route::middleware([
 
 Route::get('booking', Bookings::class)->middleware('auth')->name('booking');
 Route::get('inventory', Inventory::class)->middleware('auth')->name('inv');
-Route::get('inventory/kuali', InventoryKuali::class)->middleware('auth')->name('inv.kuali');
+Route::get('inventory/kuali', Inventorykuali::class)->middleware('auth')->name('inv.kuali');
