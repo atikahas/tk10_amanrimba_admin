@@ -5,7 +5,7 @@
                 Home
             </h2>
             <div class="bg-white overflow-hidden shadow-xl sm:rounded-lg">
-                <x-welcome />
+                {{-- <x-welcome /> --}}
             </div>
         </div>
     </div>
