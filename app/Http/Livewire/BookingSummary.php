@@ -63,7 +63,7 @@ class BookingSummary extends Component
         for ($day = 1; $day <= 365; $day++) {
             $calendarData[] = [
                 'day' => $day,
-                'color' => 'grey', // Default color for unbooked days
+                'color' => 'grey',
             ];
         }
     
@@ -88,7 +88,7 @@ class BookingSummary extends Component
             }
         }
 
-        // dd($calendarData, $monthData);
+        // dd($calendarData);
 
         return view('livewire.bookings.booking-summary', compact('currentYear','ttlbooking','ttlpax','ttldays','monthData','calendarData'));
     }

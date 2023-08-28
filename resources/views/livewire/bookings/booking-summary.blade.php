@@ -63,7 +63,7 @@
                 </div>
                 <div class="card w-full bg-base-100 shadow mt-4">
                     <div class="card-body">
-                        <div id="calendar"></div>
+                        <div id="calendar-container"></div>
                     </div>
                 </div>
                 <div class="card w-full bg-base-100 shadow mt-4">
@@ -118,62 +118,64 @@
     });
 </script>
 <script>
+    // Function to create the calendar
+    function createCalendar() {
+        // Get the container width
+        var containerWidth = document.getElementById("calendar-container").offsetWidth;
 
-    // Define your calendar dimensions and layout parameters
-     var cellSize = 14;
-     var width = Math.ceil(365 / 7) * cellSize; // Number of weeks in a year
-     var height = 7 * cellSize; // 7 rows for each day of the week
-     var calendarData = @json($calendarData);
- 
-     // Adjust the width to include extra space for the day labels
-     var totalWidth = width + cellSize * 2; 
- 
-     // Create an SVG element to contain the calendar with extra width
-     var svg = d3.select("#calendar")
-         .append("svg")
-         .attr("width", totalWidth)
-         .attr("height", height)
-         .append("g")
-         .attr("transform", "translate(" + cellSize * 2 + ", 0)"); // Move the calendar box to the right
- 
-     // Define a color scale for mapping colors
-     var colorScale = d3.scaleOrdinal()
-         .domain(["grey", "blue", "red"])
-         .range(["#e5e5e5", "#570ef8", "#f100b8"]);
- 
-     // Loop through the calendarData and create rectangles for each day
-     var days = svg.selectAll(".day")
-         .data(calendarData)
-         .enter().append("rect")
-         .attr("class", "day")
-         .attr("stroke", "#fff")
-         .attr("width", cellSize)
-         .attr("height", cellSize)
-         .attr("x", function(d, i) { return Math.floor(i / 7) * cellSize; })
-         .attr("y", function(d, i) { return (i % 7) * cellSize; })
-         .style("fill", function(d) { return colorScale(d.color); });
- 
-     // Add text labels for the days on the left vertically
-     var dayLabels = svg.selectAll(".dayLabel")
-         .data(["S", "M", "T", "W", "T", "F", "S"])
-         .enter().append("text")
-         .attr("class", "dayLabel")
-         .attr("x", -10) // Place the day labels to the left
-         .attr("y", function(d, i) { return i * cellSize + cellSize / 2; })
-         .style("text-anchor", "middle")
-         .style("writing-mode", "tb-rl") // Vertical writing mode
-         .text(function(d) { return d; });
- 
-     // Add a title for the calendar
-     svg.append("text")
-         .attr("x", totalWidth / 2)
-         .attr("y", -25)
-         .attr("text-anchor", "middle")
-         .style("font-size", "18px")
-         .text("Beautiful Calendar");
- 
- 
- 
- </script>
+        // Define your calendar dimensions and layout parameters based on the container width
+        var cellSize = containerWidth / Math.ceil(365 / 7); // Adjust cell size based on container width
+        var width = Math.ceil(365 / 7) * cellSize;
+        var height = 7 * cellSize;
+        var calendarData = @json($calendarData);
+
+        // Adjust the width to include extra space for the day labels
+        var totalWidth = width + cellSize * 2;
+
+        // Create an SVG element to contain the calendar with extra width
+        var svg = d3.select("#calendar-container")
+            .html("") // Clear the container before appending
+            .append("svg")
+            .attr("width", totalWidth)
+            .attr("height", height)
+            .append("g")
+            .attr("transform", "translate(" + cellSize * 1 + ", 0)");
+
+        // Define a color scale for mapping colors
+        var colorScale = d3.scaleOrdinal()
+            .domain(["grey", "blue", "red"])
+            .range(["#e5e5e5", "#570ef8", "#f100b8"]);
+
+        // Loop through the calendarData and create rectangles for each day
+        var days = svg.selectAll(".day")
+            .data(calendarData)
+            .enter().append("rect")
+            .attr("class", "day")
+            .attr("stroke", "#fff")
+            .attr("width", cellSize)
+            .attr("height", cellSize)
+            .attr("x", function(d, i) { return Math.floor(i / 7) * cellSize; })
+            .attr("y", function(d, i) { return (i % 7) * cellSize; })
+            .style("fill", function(d) { return colorScale(d.color); });
+
+        // Add text labels for the days on the left vertically
+        var dayLabels = svg.selectAll(".dayLabel")
+            .data(["S", "M", "T", "W", "T", "F", "S"])
+            .enter().append("text")
+            .attr("class", "dayLabel")
+            .attr("x", -10) // Place the day labels to the left
+            .attr("y", function(d, i) { return i * cellSize + cellSize / 2; })
+            .style("text-anchor", "middle")
+            .style("writing-mode", "tb-rl") // Vertical writing mode
+            .text(function(d) { return d; });
+    }
+
+    // Initial creation of the calendar
+    createCalendar();
+
+    // Update the calendar when the window is resized
+    window.addEventListener("resize", createCalendar);
+</script>
+
 
 

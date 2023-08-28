@@ -20,8 +20,12 @@
             <div class="hero min-h-screen bg-base-200">
                 <div class="hero-content text-center">
                     <div class="max-w-md">
-                        <h1 class="text-5xl font-bold">Hello there</h1>
-                        <p class="py-6">Provident cupiditate voluptatem et in. Quaerat fugiat ut assumenda excepturi exercitationem quasi. In deleniti eaque aut repudiandae et a id nisi.</p>
+                        {{-- <p><span class="loading loading-infinity loading-lg"></span></p> --}}
+                        <div class="flex justify-center">
+                            <img src="{{ asset('img/ARAdminLogo.png') }}" style="height: 120px">
+                        </div>
+                        
+                        <p class="pb-6">Admin Aman Rimba Private Estate.</p>
                         @if (Route::has('login'))
                             @auth
                                 <a href="{{ url('/dashboard') }}" class="btn btn-primary btn-outline">Dashboard</a>

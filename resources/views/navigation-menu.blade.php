@@ -12,7 +12,6 @@
         </div>
     </div>
     <div class="navbar-center">
-        {{-- <a href="{{ route('dashboard') }}" class="btn btn-ghost normal-case text-xl">AR Admin</a> --}}
         <a href="{{ route('dashboard') }}" class="btn btn-ghost normal-case text-xl">
             <img style="height: 40px;" src="{{ asset('img/AR-logo.jpg') }}"/>
         </a>
